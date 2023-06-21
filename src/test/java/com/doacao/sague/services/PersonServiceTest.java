@@ -91,6 +91,7 @@ public class PersonServiceTest {
 
 
         when(repository.saveAll(anyList())).thenReturn(personList);
+        when(repository.findByCpfOrRg(anyList(), anyList())).thenReturn(List.of());
         when(mapper.toPessoa(any())).thenReturn(person);
         when(mapper.toPessoaDTO(any())).thenReturn(personDTO);
 
@@ -107,6 +108,41 @@ public class PersonServiceTest {
         verify(repository, times(1)).saveAll(anyList());
         verify(mapper, times(2)).toPessoa(any(PersonDTO.class));
         verify(mapper, times(2)).toPessoaDTO(any(Person.class));
+
+        verify(validationsService, times(2)).cpfValidator(MOCK_CPF);
+        verify(validationsService, times(2)).validateEmails(MOCK_EMAIL);
+        verify(validationsService, times(2)).inputNonNull(MOCK_TELEFONE_FIXO, "Telefone Fixo");
+        verify(validationsService, times(2)).inputNonNull(MOCK_DATA_NASCIMENTO, "Data de Nascimento");
+        verify(validationsService, times(2)).inputNonNull(MOCK_TIPO_SANGUINEO, "Tipo Sanguineo");
+
+
+    }
+
+    @Test
+    void testSaveAllWithAllExistingPeople() {
+        Person person = personBuilder(MOCK_CPF, MOCK_EMAIL, MOCK_TELEFONE_FIXO, MOCK_DATA_NASCIMENTO, MOCK_TIPO_SANGUINEO);
+        PersonDTO personDTO = personDTOBuilder(MOCK_CPF, MOCK_EMAIL, MOCK_TELEFONE_FIXO, MOCK_DATA_NASCIMENTO, MOCK_TIPO_SANGUINEO);
+        List<Person> personList = List.of(person, person);
+        List<PersonDTO> personBuilderDTO = List.of(personDTO, personDTO);
+
+
+        when(repository.saveAll(List.of())).thenReturn(List.of());
+        when(repository.findByCpfOrRg(anyList(), anyList())).thenReturn(personList);
+        when(mapper.toPessoa(any())).thenReturn(person);
+
+        Mockito.doNothing().when(validationsService).cpfValidator(MOCK_CPF);
+        Mockito.doNothing().when(validationsService).validateEmails(MOCK_EMAIL);
+        Mockito.doNothing().when(validationsService).inputNonNull(MOCK_TELEFONE_FIXO, "Telefone Fixo");
+        Mockito.doNothing().when(validationsService).inputNonNull(MOCK_DATA_NASCIMENTO, "Data de Nascimento");
+        Mockito.doNothing().when(validationsService).inputNonNull(MOCK_TIPO_SANGUINEO, "Tipo Sanguineo");
+
+        List<PersonDTO> listPersonDTO = target.saveAll(personBuilderDTO);
+
+        assertEquals(0, listPersonDTO.size());
+
+        verify(repository, times(1)).saveAll(List.of());
+        verify(mapper, times(2)).toPessoa(any(PersonDTO.class));
+        verify(mapper, times(0)).toPessoaDTO(any(Person.class));
 
         verify(validationsService, times(2)).cpfValidator(MOCK_CPF);
         verify(validationsService, times(2)).validateEmails(MOCK_EMAIL);

@@ -2,16 +2,17 @@ package com.doacao.sague.services;
 
 import br.com.caelum.stella.validation.CPFValidator;
 import com.doacao.sague.exception.BadRequestException;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.mail.internet.InternetAddress;
 import java.util.Objects;
 
 @Service
+@AllArgsConstructor
 public class ValidationsService {
-
+    private final CPFValidator cpfValidator;
     public void cpfValidator(String cpf) {
-        CPFValidator cpfValidator = new CPFValidator();
         try {
             cpfValidator.assertValid(cpf);
         } catch (Exception e) {
@@ -31,7 +32,7 @@ public class ValidationsService {
 
     public void inputNonNull(Object input, String parameter) {
         if (Objects.isNull(input)) {
-            new BadRequestException(String.format("Parametro %s não pode ser nulo"));
+            throw new BadRequestException(String.format("Parametro %s não pode ser nulo", parameter));
         }
     }
 
