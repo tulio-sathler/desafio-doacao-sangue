@@ -2,6 +2,7 @@ package com.doacao.sague.model.dto;
 
 import com.doacao.sague.model.enums.BloodTypeEnum;
 import com.doacao.sague.model.enums.GenderEnum;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -10,8 +11,8 @@ import java.util.Date;
 @Data
 @Builder
 @AllArgsConstructor
-@RequiredArgsConstructor
 public class PersonDTO {
+
 
     @NonNull
     private String nome;
@@ -22,20 +23,18 @@ public class PersonDTO {
     @NonNull
     private String rg;
 
-    @NonNull
     @JsonProperty("data_nasc")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataNascimento;
 
     @NonNull
     private GenderEnum sexo;
 
     @NonNull
-    @JsonProperty("mae")
-    private String nomeMae;
+    private String mae;
 
     @NonNull
-    @JsonProperty("pai")
-    private String nomePai;
+    private String pai;
 
     @NonNull
     private String email;
@@ -58,6 +57,7 @@ public class PersonDTO {
     @NonNull
     private String estado;
 
+//    @NonNull
     @JsonProperty("telefone_fixo")
     private String telefoneFixo;
 
@@ -70,7 +70,7 @@ public class PersonDTO {
     @NonNull
     private Double peso;
 
-    @NonNull
+    //@NonNull
     @JsonProperty("tipo_sanguineo")
     private BloodTypeEnum tipoSanguineo;
 

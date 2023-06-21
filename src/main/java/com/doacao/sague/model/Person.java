@@ -7,7 +7,8 @@ import lombok.*;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Builder
 @NoArgsConstructor
@@ -16,7 +17,7 @@ import java.util.Date;
 public class Person extends BaseEntity{
 
 	@Column(nullable = false)
-	private String name;
+	private String nome;
 
 	@Column(nullable = false, length = 11, unique = true)
 	private String cpf;
@@ -29,13 +30,13 @@ public class Person extends BaseEntity{
 
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
-	private GenderEnum sexo;
+	private GenderEnum gender;
 
 	@Column(nullable = false)
-	private String nomeMae;
+	private String mae;
 
 	@Column(nullable = false)
-	private String nomePai;
+	private String pai;
 
 	@Column(nullable = false)
 	private String email;
@@ -58,7 +59,7 @@ public class Person extends BaseEntity{
 	@Column(nullable = false, length = 2)
 	private String estado;
 
-	@Column(length = 11)
+	@Column(length = 15)
 	private String telefoneFixo;
 
 	@Column(nullable = false, length = 11)
@@ -70,8 +71,18 @@ public class Person extends BaseEntity{
 	@Column(nullable = false)
 	private Double peso;
 
-	@Column(nullable = false, length = 3)
+	@Column(length = 3)
 	@Enumerated(EnumType.STRING)
 	private BloodTypeEnum tipoSanguineo;
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this)
+			return true;
+		if (!(o instanceof Person))
+			return false;
+		Person other = (Person)o;
+		return this.rg == other.rg && this.cpf == other.cpf;
+	}
 
 }

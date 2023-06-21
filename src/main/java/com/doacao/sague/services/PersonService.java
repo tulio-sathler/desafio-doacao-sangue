@@ -3,16 +3,17 @@ package com.doacao.sague.services;
 import com.doacao.sague.exception.BadRequestException;
 import com.doacao.sague.model.Person;
 import com.doacao.sague.model.dto.PersonDTO;
+import com.doacao.sague.model.dto.query.PersonByStateDTO;
 import com.doacao.sague.model.mapper.PersonMapper;
 import com.doacao.sague.repository.PersonRepository;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class PersonService {
 
     private final PersonRepository personRepository;
@@ -37,6 +38,10 @@ public class PersonService {
                 person -> personMapper.toPessoaDTO(person)
         ).collect(Collectors.toList());
 
+    }
+
+    public List<PersonByStateDTO> amountPeopleByState() {
+        return personRepository.amountOfPeopleByState();
     }
 
 }
