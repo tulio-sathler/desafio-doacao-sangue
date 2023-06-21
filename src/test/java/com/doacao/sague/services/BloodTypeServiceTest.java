@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -27,6 +28,12 @@ public class BloodTypeServiceTest {
 
     @InjectMocks
     private BloodTypeService target;
+
+
+    // ############################################################################################
+    // #################################### averageAgeByBlood #####################################
+    // ############################################################################################
+
 
     @Test
     void averageAgeByBloodSucess() {
@@ -95,5 +102,37 @@ public class BloodTypeServiceTest {
 
     }
 
+
+    // ############################################################################################
+    // ############################### numberOfDonatorsByBloodType ################################
+    // ############################################################################################
+
+    @Test
+    void numberOfDonatorsByBloodTypeMultipleData() {
+        List<Integer> listNumber = Arrays.asList(1, 65, 54, 75, 54, 65, 23, 43);
+
+        var allTypes = BloodTypeEnum.values();
+
+        for (int i = 0; i < allTypes.length; i++) {
+            when(repository.numberOfDonatorsByBloodType(allTypes[i].getDonators())).thenReturn(listNumber.get(i));
+        }
+
+        var result = target.numberOfDonatorsByBloodType();
+
+        for (int i = 0; i < allTypes.length; i++) {
+            verify(repository, times(1)).numberOfDonatorsByBloodType(allTypes[i].getDonators());
+        }
+
+        Assertions.assertEquals(8, result.size());
+        Assertions.assertEquals(1, result.get(0).getDonators());
+        Assertions.assertEquals(65, result.get(1).getDonators());
+        Assertions.assertEquals(54, result.get(2).getDonators());
+        Assertions.assertEquals(75, result.get(3).getDonators());
+        Assertions.assertEquals(54, result.get(4).getDonators());
+        Assertions.assertEquals(65, result.get(5).getDonators());
+        Assertions.assertEquals(23, result.get(6).getDonators());
+        Assertions.assertEquals(43, result.get(7).getDonators());
+
+    }
 
 }

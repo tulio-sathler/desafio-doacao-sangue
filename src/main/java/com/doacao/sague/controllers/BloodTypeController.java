@@ -1,6 +1,7 @@
 package com.doacao.sague.controllers;
 
 import com.doacao.sague.model.dto.BloodTypeDTO;
+import com.doacao.sague.model.dto.DonatorsDTO;
 import com.doacao.sague.services.BloodTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,11 @@ public class BloodTypeController {
     @GetMapping("/average")
     public ResponseEntity<List<BloodTypeDTO>> averageAgeByBloodType() {
         return new ResponseEntity<>(service.averageAgeByBlood(), HttpStatus.OK);
+    }
+
+    @GetMapping("/donators")
+    public ResponseEntity<List<DonatorsDTO>> numberOfDonatorsByBloodType() {
+        return new ResponseEntity<>(service.numberOfDonatorsByBloodType(), HttpStatus.OK);
     }
 
 }

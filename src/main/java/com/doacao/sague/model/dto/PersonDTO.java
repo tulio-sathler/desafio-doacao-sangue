@@ -57,7 +57,7 @@ public class PersonDTO {
     @NonNull
     private String estado;
 
-//    @NonNull
+    //    @NonNull
     @JsonProperty("telefone_fixo")
     private String telefoneFixo;
 

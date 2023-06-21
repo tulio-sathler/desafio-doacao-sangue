@@ -14,5 +14,5 @@ public class BloodTypeQueryDTO {
 
     private BloodTypeEnum bloodType;
 
-    private Double averageAge;
+    private Double value;
 }

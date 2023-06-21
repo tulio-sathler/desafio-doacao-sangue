@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface BloodTypeMapper {
 
-    @Mapping(source = "averageAge", target = "averageAge", numberFormat = "#.00")
+    @Mapping(source = "value", target = "averageAge", numberFormat = "#.00")
     BloodTypeDTO toBloodTypeDTO(BloodTypeQueryDTO bloodTypeQueryDTO);
 
 }
