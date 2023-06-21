@@ -41,4 +41,4 @@ Cada endpoint possui uma rota específica e método HTTP associado para acessar 
 
 Para acessar o banco de dados, acessar a rota: ```http://localhost:8080/h2``` 
 
-Para acessar a documentação do swagget acessar a rota:  ```http://localhost:8080/swagger-ui.html```
+A documentação está no arquivo swagger.yaml com descrição dos campos.

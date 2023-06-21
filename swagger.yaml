@@ -1,0 +1,197 @@
+openapi: 3.0.3
+info:
+  title: Sample API
+  version: 1.0.0
+servers:
+  - url: https://api.example.com/v1
+tags:
+  - name: blood-type
+    description: Operations related to blood types
+  - name: imc
+    description: Operations related to IMC (Body Mass Index)
+  - name: people
+    description: Operations related to people
+paths:
+  /blood-type/average:
+    get:
+      tags:
+        - blood-type
+      summary: Get average value by blood type
+      parameters:
+        - name: bloodType
+          in: query
+          description: Blood type
+          required: true
+          schema:
+            type: string
+            enum: [A+, B+, O+, AB+, A-, B-, O-, AB-]
+      responses:
+        '200':
+          description: Successful operation
+
+  /blood-type/donators:
+    get:
+      tags:
+        - blood-type
+      summary: Get number of donators by blood type
+      parameters:
+        - name: bloodType
+          in: query
+          description: Blood type
+          required: true
+          schema:
+            type: string
+            enum: [A+, B+, O+, AB+, A-, B-, O-, AB-]
+        - name: donators
+          in: query
+          description: Number of donators
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Successful operation
+
+  /imc:
+    get:
+      tags:
+        - imc
+      summary: Get IMC value
+      parameters:
+        - name: dateRange
+          in: query
+          description: Date range
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: imc
+          in: query
+          description: IMC value
+          required: true
+          schema:
+            type: number
+            format: double
+      responses:
+        '200':
+          description: Successful operation
+
+  /imc/weight-by-gender:
+    get:
+      tags:
+        - imc
+      summary: Get weight by gender
+      parameters:
+        - name: gender
+          in: query
+          description: Gender
+          required: true
+          schema:
+            type: string
+            enum: [MASCULINO, FEMINIMO]
+        - name: total
+          in: query
+          description: Total weight
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: overWeight
+          in: query
+          description: Overweight value
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Successful operation
+
+  /people/import-all:
+    post:
+      tags:
+        - people
+      summary: Import all people
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '200':
+          description: Successful operation
+
+  /people/person-by-state:
+    get:
+      tags:
+        - people
+      summary: Get person by state
+      parameters:
+        - name: estado
+          in: query
+          description: State
+          required: true
+          schema:
+            type: string
+            enum: [AC, AL, AM, AP, BA, CE, DF, ES, GO, MA, MG, MS, MT, PA, PB, PE, PI, PR, RJ, RN, RO, RR, RS, SC, SE, SP, TO]
+        - name: valor
+          in: query
+          description: Value
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+
+components:
+  schemas:
+    Person:
+      type: object
+      properties:
+        nome:
+          type: string
+        cpf:
+          type: string
+        rg:
+          type: string
+        data_nasc:
+          type: string
+          format: date
+        sexo:
+          type: string
+          enum: [MASCULINO, FEMINIMO]
+        mae:
+          type: string
+        pai:
+          type: string
+        email:
+          type: string
+        cep:
+          type: string
+        endereco:
+          type: string
+        numero:
+          type: integer
+        bairro:
+          type: string
+        cidade:
+          type: string
+        estado:
+          type: string
+          enum: [AC, AL, AM, AP, BA, CE, DF, ES, GO, MA, MG, MS, MT, PA, PB, PE, PI, PR, RJ, RN, RO, RR, RS, SC, SE, SP, TO]
+        telefone_fixo:
+          type: string
+        celular:
+          type: string
+        altura:
+          type: number
+          format: double
+        peso:
+          type: number
+          format: double
+        tipo_sanguineo:
+          type: string
+          enum: [A+, B+, O+, AB+, A-, B-, O-, AB-]
