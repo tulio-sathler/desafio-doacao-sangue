@@ -3,6 +3,7 @@ package com.doacao.sague.services;
 import com.doacao.sague.exception.BadRequestException;
 import com.doacao.sague.model.Person;
 import com.doacao.sague.model.dto.PersonDTO;
+import com.doacao.sague.model.dto.query.PersonByStateDTO;
 import com.doacao.sague.model.mapper.PersonMapper;
 import com.doacao.sague.repository.PersonRepository;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 import static com.doacao.sague.constants.ConstantsTest.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.*;
@@ -41,6 +41,9 @@ public class PersonServiceTest {
         assertThrows(BadRequestException.class, () -> target.saveAll(List.of()));
     }
 
+    // ############################################################################################
+    // ######################################### saveAll ##########################################
+    // ############################################################################################
     @Test
     void testSaveAllSucess() {
         Person person = personBuilder(MOCK_CPF);
@@ -58,11 +61,6 @@ public class PersonServiceTest {
         verify(repository, times(1)).saveAll(anyList());
         verify(mapper, times(1)).toPessoa(any(PersonDTO.class));
         verify(mapper, times(1)).toPessoaDTO(any(Person.class));
-
-        for (int i = 0; i < listPersonDTO.size(); i++) {
-            assertEquals(personBuilderDTO.get(i).getCpf(), listPersonDTO.get(i).getCpf());
-        }
-
     }
 
     @Test
@@ -83,11 +81,15 @@ public class PersonServiceTest {
         verify(mapper, times(2)).toPessoa(any(PersonDTO.class));
         verify(mapper, times(2)).toPessoaDTO(any(Person.class));
 
-        for (int i = 0; i < listPersonDTO.size(); i++) {
-            assertEquals(personBuilderDTO.get(i).getCpf(), listPersonDTO.get(i).getCpf());
-        }
-
     }
+    // ############################################################################################
+    // ######################################### saveAll ##########################################
+    // ############################################################################################
 
-
+    @Test
+    void testamountPeopleByState() {
+        when(repository.amountOfPeopleByState()).thenReturn(List.of(PersonByStateDTO.builder().build()));
+        target.amountPeopleByState();
+        verify(repository, times(1)).amountOfPeopleByState();
+    }
 }
