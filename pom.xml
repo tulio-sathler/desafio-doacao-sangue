@@ -18,6 +18,10 @@
 		<mapstruct.version>1.5.3.Final</mapstruct.version>
 		<jacoco.version>0.8.8</jacoco.version>
 		<maven.plugins.version>3.11.0</maven.plugins.version>
+		<br.com.caelum.stella.version>2.1.6</br.com.caelum.stella.version>
+		<javax.mail.version>1.4.7</javax.mail.version>
+		<io.springfox>2.9.2</io.springfox>
+
 	</properties>
 	<dependencies>
 		<dependency>
@@ -46,6 +50,26 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.com.caelum.stella</groupId>
+			<artifactId>caelum-stella-core</artifactId>
+			<version>${br.com.caelum.stella.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>${javax.mail.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>3.0.0</version>
 		</dependency>
 	</dependencies>
 
@@ -76,26 +100,6 @@
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
-<!--			<plugin>-->
-<!--				<groupId>org.jacoco</groupId>-->
-<!--				<artifactId>jacoco-maven-plugin</artifactId>-->
-<!--				<version>${jacoco.version}</version>-->
-<!--				<configuration>-->
-<!--					<excludes>-->
-<!--						<exclude>**/*model.*</exclude>-->
-<!--						<exclude>**/*exception.*</exclude>-->
-<!--					</excludes>-->
-<!--				</configuration>-->
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<id>jacoco-report</id>-->
-<!--						<goals>-->
-<!--							<goal>report</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--			</plugin>-->
 		</plugins>
 	</build>
-
 </project>

@@ -2,9 +2,13 @@ package com.doacao.sague.model.dto;
 
 import com.doacao.sague.model.enums.BloodTypeEnum;
 import com.doacao.sague.model.enums.GenderEnum;
+import com.doacao.sague.model.enums.StatesEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NonNull;
 
 import java.util.Date;
 
@@ -12,7 +16,6 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 public class PersonDTO {
-
 
     @NonNull
     private String nome;
@@ -23,7 +26,7 @@ public class PersonDTO {
     @NonNull
     private String rg;
 
-    @JsonProperty("data_nasc")
+    @JsonProperty(value = "data_nasc")
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataNascimento;
 
@@ -55,10 +58,9 @@ public class PersonDTO {
     private String cidade;
 
     @NonNull
-    private String estado;
+    private StatesEnum estado;
 
-    //    @NonNull
-    @JsonProperty("telefone_fixo")
+    @JsonProperty(value = "telefone_fixo")
     private String telefoneFixo;
 
     @NonNull
@@ -70,8 +72,7 @@ public class PersonDTO {
     @NonNull
     private Double peso;
 
-    //@NonNull
-    @JsonProperty("tipo_sanguineo")
+    @JsonProperty(value = "tipo_sanguineo")
     private BloodTypeEnum tipoSanguineo;
 
 }

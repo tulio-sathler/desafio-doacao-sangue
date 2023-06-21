@@ -49,7 +49,5 @@ public interface ImcPeopleRepository extends JpaRepository<Person, String> {
             """)
     List<OverweightPeopleByGenderQueryDTO> percentageObeseByGender();
 
-    @Query("select p from Person p where rg in :rgList or cpf in :cpfList")
-    List<Person> findByCpfOrRg(@Param("rgList") List<String> rgList, @Param("cpfList") List<String> cpfList);
 
 }
