@@ -26,6 +26,3 @@ public class Utils {
         return formatterNumber(porcentual).concat("%");
     }
 }
-
-//TODO VALIDAR SE JA EXISTE E N TENTAR CIRAR DE NV
-//TODO
