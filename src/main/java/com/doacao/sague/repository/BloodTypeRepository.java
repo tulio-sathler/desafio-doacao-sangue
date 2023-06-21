@@ -16,7 +16,7 @@ public interface BloodTypeRepository extends JpaRepository<Person, String> {
     @Query("Select new com.doacao.sague.model.dto.query.BloodTypeQueryDTO(p.tipoSanguineo, AVG(TIMESTAMPDIFF(YEAR, p.dataNascimento, CURDATE()))) from Person p group by p.tipoSanguineo")
     List<BloodTypeQueryDTO> averageAgeByBlood();
 
-    @Query("Select count(*) from Person p where p.tipoSanguineo in (:donatorsList)")
+    @Query("Select count(*) from Person p where p.tipoSanguineo in (:donatorsList) and TIMESTAMPDIFF(YEAR, p.dataNascimento, CURDATE()) between 16 and 69 and p.peso > 50")
     Integer numberOfDonatorsByBloodType(@Param("donatorsList") List<BloodTypeEnum> donatorsList );
 
 }
