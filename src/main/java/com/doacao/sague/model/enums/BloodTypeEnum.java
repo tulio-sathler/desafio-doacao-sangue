@@ -1,5 +1,6 @@
 package com.doacao.sague.model.enums;
 
+import com.doacao.sague.exception.BadRequestException;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,7 @@ public enum BloodTypeEnum {
         return Stream.of(BloodTypeEnum.values())
                 .filter(targetEnum -> targetEnum.bloodType.equals(bloodType))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new BadRequestException("Tipo Sanguineo Inexistente"));
     }
 
     @JsonValue

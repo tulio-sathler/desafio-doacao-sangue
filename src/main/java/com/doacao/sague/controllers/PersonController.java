@@ -6,6 +6,7 @@ import com.doacao.sague.services.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,15 +20,15 @@ public class PersonController {
 
 
     @PostMapping("/import-all")
-    public ResponseEntity<List<PersonDTO>> importPeople(@RequestBody List<PersonDTO> people) {
+    public ResponseEntity<List<PersonDTO>> importPeople(@RequestBody @Validated List<PersonDTO> people) {
         return new ResponseEntity<>(personService.saveAll(people), HttpStatus.CREATED);
     }
+
+    //TODO adicionar de varias vezes
 
     @GetMapping("/person-by-state")
     public ResponseEntity<List<PersonByStateDTO>> candidatesByStates () {
         return new ResponseEntity<>(personService.amountPeopleByState(), HttpStatus.OK) ;
     }
-
-
 
 }

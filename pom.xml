@@ -18,6 +18,8 @@
 		<mapstruct.version>1.5.3.Final</mapstruct.version>
 		<jacoco.version>0.8.8</jacoco.version>
 		<maven.plugins.version>3.11.0</maven.plugins.version>
+		<br.com.caelum.stella.version>2.1.6</br.com.caelum.stella.version>
+		<javax.mail.version>1.4.7</javax.mail.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -46,6 +48,16 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.com.caelum.stella</groupId>
+			<artifactId>caelum-stella-core</artifactId>
+			<version>${br.com.caelum.stella.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>${javax.mail.version}</version>
 		</dependency>
 	</dependencies>
 

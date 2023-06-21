@@ -14,7 +14,7 @@ public interface PersonMapper {
     @Mapping(target = "cpf", expression = "java(Utils.removeNonDigites(personDTO.getCpf()))")
     @Mapping(target = "rg", expression = "java(Utils.removeNonDigites(personDTO.getRg()))")
     @Mapping(target = "celular", expression = "java(Utils.removeNonDigites(personDTO.getCelular()))")
-    //@Mapping(target = "telefoneFixo", expression = "java(Utils.removeNonDigites(personDTO.getTelefoneFixo()))")
+    @Mapping(target = "telefoneFixo", expression = "java(Utils.removeNonDigites(personDTO.getTelefoneFixo()))")
     @Mapping(target = "cep", expression = "java(Utils.removeNonDigites(personDTO.getCep()))")
     Person toPessoa(PersonDTO personDTO);
 

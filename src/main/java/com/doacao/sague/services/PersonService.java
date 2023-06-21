@@ -20,6 +20,8 @@ public class PersonService {
 
     private final PersonMapper personMapper;
 
+    private ValidationsService validations;
+
     public List<PersonDTO> saveAll(List<PersonDTO> people) {
         if(people == null || people.isEmpty()) {
             throw new BadRequestException("Lista de pessoas está vazia");
@@ -28,6 +30,15 @@ public class PersonService {
         List<Person> listPeople = people.stream().map(
                 personDTO -> personMapper.toPessoa(personDTO)
         ).collect(Collectors.toList());
+
+
+        listPeople.stream().forEach((person) -> {
+            validations.cpfValidator(person.getCpf());
+            validations.validateEmails(person.getEmail());
+            validations.inputNonNull(person.getTelefoneFixo(), "Telefone Fixo");
+            validations.inputNonNull(person.getDataNascimento(), "Data de Nascimento");
+            validations.inputNonNull(person.getTipoSanguineo(), "Tipo Sanguineo");
+        });
 
         List<Person> savedPeople = personRepository.saveAll(listPeople);
 
@@ -43,5 +54,6 @@ public class PersonService {
     public List<PersonByStateDTO> amountPeopleByState() {
         return personRepository.amountOfPeopleByState();
     }
+
 
 }

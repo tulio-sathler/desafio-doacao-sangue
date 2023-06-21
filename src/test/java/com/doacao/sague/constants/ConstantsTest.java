@@ -8,6 +8,7 @@ import com.doacao.sague.model.dto.PersonDTO;
 import com.doacao.sague.model.dto.query.OverweightPeopleByGenderQueryDTO;
 import com.doacao.sague.model.enums.BloodTypeEnum;
 import com.doacao.sague.model.enums.GenderEnum;
+import com.doacao.sague.model.enums.StatesEnum;
 
 import java.util.Date;
 
@@ -23,64 +24,62 @@ public class ConstantsTest {
     public static final String MOCK_CIDADE = "belo horizonte";
     public static final String MOCK_ENDERECO = "Av contorno";
     public static final Integer MOCK_NUMERO = 323;
-    public static final String MOCK_ESTADO = "Minas Gerais";
     public static final Double MOCK_ALTURA = 1.69;
     public static final Double MOCK_PESO = 82.0;
     public static final String MOCK_NOME_PAI = "joao inacio";
     public static final String MOCK_NOME_MAE = "maria jose";
     public static final String MOCK_NOME = "Tulio marques sathler";
-    public static final String MOCK_IMC = "3,50";
-    public static final String MOCK_DATE_RANGE = "0-10";
-    public static final Double MOCK_IMC_QUERY = 3.50;
-    public static final Integer MOCK_DATE_RANGE_QUERY = 0;
     public static final String MOCK_PERCENTAGE_OBECE = "54,98";
 
+    public static final BloodTypeEnum MOCK_TIPO_SANGUINEO = BloodTypeEnum.An;
+    public static final Date MOCK_DATA_NASCIMENTO = new Date();
 
-    public static PersonDTO personDTOBuilder(String cpf) {
+
+    public static PersonDTO personDTOBuilder(String cpf, String email, String telefoneFixo, Date dataNascimento, BloodTypeEnum tipoSanguineo) {
         return PersonDTO.builder()
                 .cpf(cpf)
                 .cep(MOCK_CEP)
                 .rg(MOCK_RG)
-                .email(MOCK_EMAIL)
+                .email(email)
                 .altura(MOCK_ALTURA)
                 .celular(MOCK_CELULAR)
                 .cidade(MOCK_CIDADE)
                 .nome(MOCK_NOME)
-                .dataNascimento(new Date())
+                .dataNascimento(dataNascimento)
                 .bairro(MOCK_BAIRRO)
-                .estado(MOCK_ESTADO)
+                .estado(StatesEnum.AC)
                 .peso(MOCK_PESO)
                 .sexo(GenderEnum.MASCULINO)
                 .mae(MOCK_NOME_MAE)
                 .pai(MOCK_NOME_PAI)
                 .endereco(MOCK_ENDERECO)
                 .numero(MOCK_NUMERO)
-                .telefoneFixo(MOCK_TELEFONE_FIXO)
-                .tipoSanguineo(BloodTypeEnum.An)
+                .telefoneFixo(telefoneFixo)
+                .tipoSanguineo(tipoSanguineo)
                 .build();
     }
 
-    public static Person personBuilder(String cpf) {
+    public static Person personBuilder(String cpf, String email, String telefoneFixo, Date dataNascimento, BloodTypeEnum tipoSanguineo) {
         return Person.builder()
                 .cpf(cpf)
                 .cep(MOCK_CEP)
                 .rg(MOCK_RG)
-                .email(MOCK_EMAIL)
+                .email(email)
                 .altura(MOCK_ALTURA)
                 .celular(MOCK_CELULAR)
                 .cidade(MOCK_CIDADE)
                 .nome(MOCK_NOME)
-                .dataNascimento(new Date())
+                .dataNascimento(dataNascimento)
                 .bairro(MOCK_BAIRRO)
-                .estado(MOCK_ESTADO)
+                .estado(StatesEnum.MS)
                 .peso(MOCK_PESO)
                 .gender(GenderEnum.MASCULINO)
                 .mae(MOCK_NOME_MAE)
                 .pai(MOCK_NOME_PAI)
                 .endereco(MOCK_ENDERECO)
                 .numero(MOCK_NUMERO)
-                .telefoneFixo(MOCK_TELEFONE_FIXO)
-                .tipoSanguineo(BloodTypeEnum.An)
+                .telefoneFixo(telefoneFixo)
+                .tipoSanguineo(tipoSanguineo)
                 .build();
     }
 

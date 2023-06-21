@@ -2,6 +2,7 @@ package com.doacao.sague.model;
 
 import com.doacao.sague.model.enums.BloodTypeEnum;
 import com.doacao.sague.model.enums.GenderEnum;
+import com.doacao.sague.model.enums.StatesEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -57,7 +58,7 @@ public class Person extends BaseEntity{
 	private String cidade;
 
 	@Column(nullable = false, length = 2)
-	private String estado;
+	private StatesEnum estado;
 
 	@Column(length = 15)
 	private String telefoneFixo;
